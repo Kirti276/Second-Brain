@@ -1,69 +1,128 @@
-# React + TypeScript + Vite
+# Brainly Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React-based frontend application for managing and organizing content from various social media platforms and productivity tools.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication**: Secure signup and signin functionality
+- **Content Management**: Add, view, and delete content from multiple platforms
+- **Platform Integration**: Support for Twitter, YouTube, Google Docs, Instagram, LinkedIn, and Spotify
+- **Modern UI**: Beautiful Material-UI design with responsive layout
+- **Real-time Updates**: Dynamic content refresh and state management
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** - Modern React with hooks
+- **TypeScript** - Type-safe development
+- **Material-UI (MUI)** - Beautiful UI components
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Router** - Client-side routing
+- **Axios** - HTTP client for API calls
+- **Vite** - Fast build tool and dev server
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd brainly_frontend
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:5173`
+
+## 🏗️ Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Button.tsx
+│   ├── Card.tsx
+│   ├── ContentModal.tsx
+│   ├── Input.tsx
+│   ├── Sidebar.tsx
+│   └── SidebarItem.tsx
+├── pages/              # Page components
+│   ├── dashboard.tsx
+│   ├── Signin.tsx
+│   └── Signup.tsx
+├── hooks/              # Custom React hooks
+│   └── UseContent.tsx
+├── icons/              # SVG icons
+│   ├── Logo.tsx
+│   ├── PlusIcon.tsx
+│   └── ...
+└── config.ts           # Configuration constants
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎯 Key Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Authentication
+- User registration and login
+- JWT token-based authentication
+- Secure password handling
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Dashboard
+- Content organization by platform
+- Add new content with platform selection
+- Delete content with confirmation
+- Responsive sidebar navigation
+
+### Content Management
+- Support for multiple platforms:
+  - Twitter
+  - YouTube
+  - Google Docs
+  - Instagram
+  - LinkedIn
+  - Spotify
+
+## 📱 Screenshots
+
+### Sign In Page
+![Sign In Page](screenshots/signin.png)
+
+### Sign Up Page
+![Sign Up Page](screenshots/signup.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Content Modal
+![Content Modal](screenshots/content-modal.png)
+
+## 🚀 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
+
+## 🔧 Configuration
+
+The application connects to a backend API. Update the `BACKEND_URL` in `src/config.ts` to point to your backend server.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+**Note**: This frontend requires a backend server to function properly. Make sure the backend is running and accessible.
