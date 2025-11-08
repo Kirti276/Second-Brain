@@ -29,23 +29,38 @@ export const Button = (props: ButtonProps) => {
 
   // Custom styles for primary variant
   const primaryStyles = {
-    background: "linear-gradient(90deg, #1976d2 0%, #42a5f5 100%)",
+    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
     color: "#fff",
     borderRadius: 999,
-    boxShadow: "0 2px 8px rgba(25, 118, 210, 0.15)",
+    boxShadow: "0 4px 15px rgba(102, 126, 234, 0.4)",
     fontWeight: 700,
     fontSize: size === "lg" ? "1.1rem" : size === "sm" ? "0.9rem" : "1rem",
     textTransform: "none",
-    transition: "all 0.2s cubic-bezier(.4,0,.2,1)",
+    transition: "all 0.3s cubic-bezier(.4,0,.2,1)",
+    position: "relative",
+    overflow: "hidden",
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: '-100%',
+      width: '100%',
+      height: '100%',
+      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+      transition: 'left 0.5s',
+    },
     '&:hover': {
-      background: "linear-gradient(90deg, #1565c0 0%, #1e88e5 100%)",
-      boxShadow: "0 4px 16px rgba(25, 118, 210, 0.25)",
-      transform: "scale(1.03)",
+      background: "linear-gradient(135deg, #5568d3 0%, #6a3d91 100%)",
+      boxShadow: "0 6px 20px rgba(102, 126, 234, 0.5)",
+      transform: "translateY(-2px) scale(1.02)",
+      '&::before': {
+        left: '100%',
+      },
     },
     '&:active': {
-      background: "linear-gradient(90deg, #0d47a1 0%, #1976d2 100%)",
-      boxShadow: "0 2px 8px rgba(25, 118, 210, 0.20)",
-      transform: "scale(0.98)",
+      background: "linear-gradient(135deg, #5568d3 0%, #6a3d91 100%)",
+      boxShadow: "0 2px 10px rgba(102, 126, 234, 0.4)",
+      transform: "translateY(0) scale(0.98)",
     },
   };
 

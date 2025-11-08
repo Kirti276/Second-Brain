@@ -1,6 +1,13 @@
 import mongoose,{ model, Document, Schema } from "mongoose";
+import dotenv from "dotenv";
 
-mongoose.connect("mongodb+srv://thisiskirti28:hCzJtiRlwnV8S1E8@cluster0.foytnsp.mongodb.net/second-brain")
+dotenv.config();
+
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is not defined");
+}
+
+mongoose.connect(process.env.DATABASE_URL);
 
 const UserSchema= new Schema({
     username: {type: String , unique: true},

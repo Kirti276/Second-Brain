@@ -14,6 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Divider from "@mui/material/Divider";
+import { useTheme } from "@mui/material/styles";
 
 function getYoutubeEmbedUrl(link: string): string {
   if (link.includes("youtu.be")) {
@@ -116,9 +117,13 @@ interface CardProps {
   link: string;
   type: "Twitter" | "Youtube" | "Google Doc" | "Instagram" | "LinkedIn" | "Spotify";
   onDelete: (_id: string) => void;
+  showDelete?: boolean;
 }
 
 export function Card(props: CardProps) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+
   // Icon for the card type
   const typeIcon = {
     Youtube: <YoutubeIcon size="md" />,
@@ -144,27 +149,34 @@ export function Card(props: CardProps) {
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
-          background: 'linear-gradient(135deg, #f5faff 0%, #e3f2fd 100%)',
-          boxShadow: '0 8px 32px rgba(25, 118, 210, 0.18)',
+          background: isDark
+            ? 'linear-gradient(135deg, #1e293b 0%, #334155 100%)'
+            : 'linear-gradient(135deg, #f5faff 0%, #e3f2fd 100%)',
+          boxShadow: isDark
+            ? '0 8px 32px rgba(0, 0, 0, 0.4)'
+            : '0 8px 32px rgba(25, 118, 210, 0.18)',
           transition: 'box-shadow 0.25s, transform 0.25s',
           '&:hover': {
-            boxShadow: '0 16px 48px rgba(25, 118, 210, 0.28)',
+            boxShadow: isDark
+              ? '0 16px 48px rgba(102, 126, 234, 0.3)'
+              : '0 16px 48px rgba(25, 118, 210, 0.28)',
             transform: 'translateY(-4px) scale(1.025)',
             borderColor: 'primary.main',
           },
-          border: '2px solid #e3e8ef',
+          border: isDark ? '2px solid #334155' : '2px solid #e3e8ef',
           overflow: 'hidden',
         }}
       >
-        {/* Gradient accent bar at the top */}
+        {/* Enhanced gradient accent bar at the top */}
         <Box sx={{
           position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
-          height: 8,
-          background: 'linear-gradient(90deg, #1976d2 0%, #42a5f5 100%)',
+          height: 6,
+          background: 'linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
           zIndex: 2,
+          boxShadow: '0 2px 8px rgba(102, 126, 234, 0.3)',
         }} />
         <CardHeader
           avatar={
@@ -176,7 +188,7 @@ export function Card(props: CardProps) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: '#f3f6fa',
+                background: isDark ? 'rgba(51, 65, 85, 0.5)' : '#f3f6fa',
                 boxShadow: 1,
               }}
             >
@@ -189,7 +201,7 @@ export function Card(props: CardProps) {
               }
             </Box>
           }
-          title={<Box sx={{ fontWeight: 700, fontSize: '1.18rem', color: '#1a237e', letterSpacing: 0.2 }}>{props.title}</Box>}
+          title={<Box sx={{ fontWeight: 700, fontSize: '1.18rem', color: isDark ? '#f1f5f9' : '#1a237e', letterSpacing: 0.2 }}>{props.title}</Box>}
           action={
             <Box display="flex" alignItems="center">
               <Tooltip title="Share" arrow>
@@ -199,25 +211,36 @@ export function Card(props: CardProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   size="small"
-                  sx={{ color: '#1976d2', mr: 1, bgcolor: '#e3f2fd', '&:hover': { bgcolor: '#bbdefb' } }}
+                  sx={{ 
+                    color: isDark ? '#8b9aff' : '#1976d2', 
+                    mr: 1, 
+                    bgcolor: isDark ? 'rgba(102, 126, 234, 0.2)' : '#e3f2fd', 
+                    '&:hover': { bgcolor: isDark ? 'rgba(102, 126, 234, 0.3)' : '#bbdefb' } 
+                  }}
                 >
                   <ShareIcon size="md" />
                 </IconButton>
               </Tooltip>
-              <Tooltip title="Delete" arrow>
-                <IconButton
-                  onClick={() => props.onDelete(props._id)}
-                  size="small"
-                  sx={{ color: '#e53935', bgcolor: '#ffebee', '&:hover': { bgcolor: '#ffcdd2' } }}
-                >
-                  <DeleteIcon size="md" />
-                </IconButton>
-              </Tooltip>
+              {props.showDelete !== false && (
+                <Tooltip title="Delete" arrow>
+                  <IconButton
+                    onClick={() => props.onDelete(props._id)}
+                    size="small"
+                    sx={{ 
+                      color: '#e53935', 
+                      bgcolor: isDark ? 'rgba(229, 57, 53, 0.2)' : '#ffebee', 
+                      '&:hover': { bgcolor: isDark ? 'rgba(229, 57, 53, 0.3)' : '#ffcdd2' } 
+                    }}
+                  >
+                    <DeleteIcon size="md" />
+                  </IconButton>
+                </Tooltip>
+              )}
             </Box>
           }
           sx={{ pb: 0, pt: 3, px: 2, zIndex: 3, background: 'transparent' }}
         />
-        <Divider sx={{ my: 1, mx: 2, borderColor: '#e3e8ef', zIndex: 2 }} />
+        <Divider sx={{ my: 1, mx: 2, borderColor: isDark ? '#334155' : '#e3e8ef', zIndex: 2 }} />
         <CardContent sx={{ pt: 1, pb: 2, flex: 1, overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', zIndex: 1 }}>
           {/* Embeds and previews */}
           {props.type === "Youtube" && (

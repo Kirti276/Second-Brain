@@ -176,14 +176,14 @@ app.get("/api/v1/brain/:shareLink", async (req,res)=>{
     })
 
     if(!link){
-        res.status(411).json({
-            message: "Sorry incorrect input"
+        res.status(404).json({
+            message: "Share link not found"
         })
         return;
     }
 
-    //getting content
-    const content = await LinkModel.find({
+    //getting content for the user
+    const content = await ContentModel.find({
         userId: link.userId
     })
 

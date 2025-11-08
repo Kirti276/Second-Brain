@@ -12,6 +12,7 @@ import { GdocIcon } from "../icons/GdocIcon";
 import { InstaIcon } from "../icons/InstaIcon";
 import { LinkedinIcon } from "../icons/LinkedinIcon";
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import { useTheme } from "@mui/material/styles";
 
 interface SidebarProps {
   selectedApp: string | null;
@@ -29,19 +30,29 @@ const appItems = [
 ];
 
 export function Sidebar({ selectedApp, onSelectApp }: SidebarProps) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
+
   return (
     <Drawer
       variant="permanent"
       PaperProps={{
         sx: {
           width: 288,
-          background: 'linear-gradient(135deg, #e3f2fd 0%, #f5faff 100%)',
-          borderRight: '2px solid #e3e8ef',
-          boxShadow: '0 8px 32px rgba(25, 118, 210, 0.10)',
+          background: isDark 
+            ? 'rgba(15, 23, 42, 0.95)' 
+            : 'rgba(255, 255, 255, 0.9)',
+          backdropFilter: 'blur(20px)',
+          borderRight: isDark 
+            ? '1px solid rgba(51, 65, 85, 0.8)' 
+            : '1px solid rgba(226, 232, 240, 0.8)',
+          boxShadow: isDark 
+            ? '4px 0 24px rgba(0, 0, 0, 0.3)' 
+            : '4px 0 24px rgba(102, 126, 234, 0.08)',
           px: 0,
           zIndex: 1200,
-          borderTopRightRadius: 16,
-          borderBottomRightRadius: 16,
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0,
         },
       }}
       sx={{
@@ -51,14 +62,34 @@ export function Sidebar({ selectedApp, onSelectApp }: SidebarProps) {
       }}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', pt: 5, pb: 2 }}>
-        <Box sx={{ color: 'primary.main', fontSize: 80, mb: 1 }}>
+        <Box 
+          sx={{ 
+            fontSize: 70, 
+            mb: 1,
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            filter: 'drop-shadow(0 2px 4px rgba(102, 126, 234, 0.2))',
+          }}
+        >
           <Logo size="xl" />
         </Box>
-        <Typography variant="h5" fontWeight={800} color="primary" sx={{ letterSpacing: 1 }}>
+        <Typography 
+          variant="h5" 
+          fontWeight={900} 
+          sx={{ 
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            letterSpacing: 1.5,
+          }}
+        >
           Brainly
         </Typography>
       </Box>
-      <Divider sx={{ my: 2, mx: 3, borderColor: '#e3e8ef' }} />
+      <Divider sx={{ my: 2, mx: 3, borderColor: isDark ? 'rgba(51, 65, 85, 0.5)' : '#e3e8ef' }} />
       <List sx={{ pt: 2, pl: 2 }}>
         {appItems.map(item => (
           <SidebarItem
@@ -71,7 +102,7 @@ export function Sidebar({ selectedApp, onSelectApp }: SidebarProps) {
         ))}
       </List>
       <Box sx={{ flexGrow: 1 }} />
-      <Divider sx={{ my: 2, mx: 3, borderColor: '#e3e8ef' }} />
+      <Divider sx={{ my: 2, mx: 3, borderColor: isDark ? 'rgba(51, 65, 85, 0.5)' : '#e3e8ef' }} />
       <Box sx={{ textAlign: 'center', pb: 2, color: 'text.secondary', fontSize: 13 }}>
         © {new Date().getFullYear()} Brainly
       </Box>

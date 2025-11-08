@@ -12,7 +12,8 @@ import Box from "@mui/material/Box";
 import { Button } from "./Button";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
-import { Input } from "./Input"; // If Input is used elsewhere
+import { Input } from "./Input";
+import { useTheme } from "@mui/material/styles";
 
 interface ContentModalProps {
   open: boolean;
@@ -23,6 +24,8 @@ export function ContentModal({ open, onClose }: ContentModalProps) {
   const titleRef = useRef<HTMLInputElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
 
   async function addContent() {
     const title = titleRef.current?.value;
@@ -54,15 +57,21 @@ export function ContentModal({ open, onClose }: ContentModalProps) {
       PaperProps={{
         sx: {
           borderRadius: 4,
-          boxShadow: '0 8px 32px rgba(25, 118, 210, 0.25)',
+          boxShadow: isDark 
+            ? '0 8px 32px rgba(0, 0, 0, 0.5)' 
+            : '0 8px 32px rgba(25, 118, 210, 0.25)',
           overflow: 'hidden',
-          background: 'rgba(255,255,255,0.85)',
+          background: isDark 
+            ? 'rgba(15, 23, 42, 0.95)' 
+            : 'rgba(255,255,255,0.85)',
           backdropFilter: 'blur(6px)',
         },
       }}
       sx={{
         '& .MuiBackdrop-root': {
-          background: 'rgba(30, 41, 59, 0.5)',
+          background: isDark 
+            ? 'rgba(0, 0, 0, 0.7)' 
+            : 'rgba(30, 41, 59, 0.5)',
           backdropFilter: 'blur(2px)',
         },
       }}
@@ -70,18 +79,29 @@ export function ContentModal({ open, onClose }: ContentModalProps) {
       <DialogTitle
         sx={{
           m: 0,
-          p: 2,
+          p: 3,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: 'linear-gradient(90deg, #1976d2 0%, #42a5f5 100%)',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           color: '#fff',
-          fontWeight: 700,
-          fontSize: '1.2rem',
+          fontWeight: 800,
+          fontSize: '1.3rem',
+          boxShadow: '0 2px 8px rgba(102, 126, 234, 0.3)',
         }}
       >
         Add Content
-        <IconButton aria-label="close" onClick={onClose} sx={{ ml: 2, color: '#fff' }}>
+        <IconButton 
+          aria-label="close" 
+          onClick={onClose} 
+          sx={{ 
+            ml: 2, 
+            color: '#fff',
+            '&:hover': {
+              background: 'rgba(255, 255, 255, 0.2)',
+            },
+          }}
+        >
           <CloseIcon />
         </IconButton>
       </DialogTitle>
@@ -95,8 +115,13 @@ export function ContentModal({ open, onClose }: ContentModalProps) {
             size="small"
             sx={{
               borderRadius: 2,
-              background: '#f5faff',
-              '& .MuiOutlinedInput-root': { borderRadius: 2 },
+              background: isDark ? 'rgba(30, 41, 59, 0.5)' : '#f5faff',
+              '& .MuiOutlinedInput-root': { 
+                borderRadius: 2,
+                '& fieldset': {
+                  borderColor: isDark ? '#334155' : undefined,
+                },
+              },
             }}
           />
           <TextField
@@ -107,8 +132,13 @@ export function ContentModal({ open, onClose }: ContentModalProps) {
             size="small"
             sx={{
               borderRadius: 2,
-              background: '#f5faff',
-              '& .MuiOutlinedInput-root': { borderRadius: 2 },
+              background: isDark ? 'rgba(30, 41, 59, 0.5)' : '#f5faff',
+              '& .MuiOutlinedInput-root': { 
+                borderRadius: 2,
+                '& fieldset': {
+                  borderColor: isDark ? '#334155' : undefined,
+                },
+              },
             }}
           />
           <Select
@@ -120,8 +150,11 @@ export function ContentModal({ open, onClose }: ContentModalProps) {
             sx={{
               minWidth: 120,
               borderRadius: 2,
-              background: '#f5faff',
+              background: isDark ? 'rgba(30, 41, 59, 0.5)' : '#f5faff',
               '& .MuiSelect-select': { borderRadius: 2 },
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: isDark ? '#334155' : undefined,
+              },
             }}
           >
             <MenuItem value="" disabled>
