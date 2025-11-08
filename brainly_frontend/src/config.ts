@@ -1,1 +1,1 @@
-export const BACKEND_URL= "http://localhost:5000"
+export const BACKEND_URL= "https://second-brain-backend-0p4j.onrender.com"
