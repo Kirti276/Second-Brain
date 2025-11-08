@@ -3,11 +3,19 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is not defined");
-}
+export const connectDB = async () => {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is not defined");
+  }
 
-mongoose.connect(process.env.DATABASE_URL);
+  try {
+    await mongoose.connect(process.env.DATABASE_URL);
+    console.log("MongoDB connected");
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  }
+};
 
 const UserSchema= new Schema({
     username: {type: String , unique: true},

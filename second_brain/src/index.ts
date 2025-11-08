@@ -1,5 +1,5 @@
 import express from "express";
-import "./db";
+import { connectDB } from "./db";
 import mongoose, { Types } from "mongoose";
 import jwt from "jsonwebtoken";
 import {z} from "zod" ;
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 
-
+connectDB();
 app.post("/api/v1/signup" , async (req,res)=>{
     const username= req.body.username;
     const password= req.body.password;
