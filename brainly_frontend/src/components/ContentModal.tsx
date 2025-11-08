@@ -12,7 +12,6 @@ import Box from "@mui/material/Box";
 import { Button } from "./Button";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
-import { Input } from "./Input";
 import { useTheme } from "@mui/material/styles";
 
 interface ContentModalProps {
