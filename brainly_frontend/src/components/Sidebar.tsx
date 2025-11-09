@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider';
 import { GdocIcon } from "../icons/GdocIcon";
 import { InstaIcon } from "../icons/InstaIcon";
 import { LinkedinIcon } from "../icons/LinkedinIcon";
+import ExtensionIcon from '@mui/icons-material/Extension';  // For “Others” icon
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useTheme } from "@mui/material/styles";
 
@@ -27,6 +28,8 @@ const appItems = [
   { text: "Google Docs", icon: <GdocIcon size={"md"} />, type: "Google Doc" },
   { text: "LinkedIn", icon: <LinkedinIcon size={"md"} />, type: "LinkedIn" },
   { text: "Instagram", icon: <InstaIcon size={"md"} />, type: "Instagram" },
+   // 🆕 Add new category
+  { text: "Others", icon: <ExtensionIcon sx={{ fontSize: 24 }} />, type: "Others" },
 ];
 
 export function Sidebar({ selectedApp, onSelectApp }: SidebarProps) {

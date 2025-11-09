@@ -165,6 +165,7 @@ export function ContentModal({ open, onClose }: ContentModalProps) {
             <MenuItem value="LinkedIn">LinkedIn</MenuItem>
             <MenuItem value="Instagram">Instagram</MenuItem>
             <MenuItem value="Spotify">Spotify</MenuItem>
+            <MenuItem value="Other">Other</MenuItem>
           </Select>
         </Box>
       </DialogContent>
