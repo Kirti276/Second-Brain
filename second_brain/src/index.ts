@@ -9,10 +9,14 @@ import { userMiddleware } from "./middleware";
 import { UserType } from "./db";
 import { random } from "./utils";
 import cors from "cors";
+import aiChatRouter from "./aichat";
+
 
 const app= express();
 app.use(express.json());
 app.use(cors());
+app.use("/api/v1/ai", aiChatRouter);
+
 
 
 
