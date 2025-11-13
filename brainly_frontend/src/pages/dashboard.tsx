@@ -20,6 +20,9 @@ import Paper from '@mui/material/Paper';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import { BrainIcon } from '../icons/BrainIcon'; // create or import a brain-like icon if you have one
+
 
 type Content = {
   _id: string;
@@ -36,6 +39,8 @@ export function Dashboard() {
  const [deleteId, setDeleteId] = useState<string | null>(null);
  const { contents, refresh } = UseContent() as { contents: Content[]; refresh: () => void };
  const [selectedApp, setSelectedApp] = useState<string | null>(null);
+ // inside the component
+const navigate = useNavigate();
 
  async function handleDelete(_id: string) {
    await axios.delete(`${BACKEND_URL}/api/v1/content`, {
@@ -184,6 +189,14 @@ export function Dashboard() {
           </Box>
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
             <Button onClick={() => { setModalOpen(true) }} startIcon={<PlusIcon size="md" />} size="sm" variant='primary' text='Add Content' />
+            <Button
+  onClick={() => navigate('/ai')}
+  startIcon={<BrainIcon size={20} />}
+  size="sm"
+  variant="primary"
+  text="AI Summarize"
+/>
+
             <Button onClick={async () => {
               try {
                 const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
