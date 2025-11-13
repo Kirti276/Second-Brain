@@ -20,7 +20,7 @@ const AISummarize: React.FC = () => {
   // setMessages((prev) => [...prev, { role: "user", content: input }]);
   // setInput("");
   // setLoading(true);
-    const response = await fetch("http://localhost:5000/api/v1/ai/chat", {
+    const response = await fetch("https://second-brain-backend-0p4j.onrender.com", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
